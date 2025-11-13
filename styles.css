@@ -14,18 +14,31 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  position: fixed;
+  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
 body {
+  width: 100%;
+  min-height: 100vh;
   font-family: "DM Sans", sans-serif;
   background-color: #000;
   color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 img {
@@ -64,6 +77,12 @@ footer {
   justify-content: space-between;
   align-items: flex-start;
   z-index: 2;
+  will-change: transform;
+}
+
+nav {
+  top: 0;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 nav .logo {
@@ -84,6 +103,7 @@ footer {
   width: 100%;
   height: 100svh;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .carousel-images,
@@ -196,6 +216,296 @@ footer {
   color: #000;
 }
 
+/* New Scrollable Sections */
+
+/* Intro Section */
+.intro-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, #000 0%, #0a0a0a 100%);
+}
+
+.intro-content {
+  max-width: 900px;
+  text-align: center;
+}
+
+.section-heading {
+  font-family: "De Fonte Plus";
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -0.05rem;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.intro-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Featured Grid Section */
+.featured-grid-section {
+  padding: 8rem 2rem;
+  background: #000;
+}
+
+.grid-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.artwork-card {
+  position: relative;
+  display: block;
+  background: #0a0a0a;
+  border: 0.075rem solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 400ms ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.artwork-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-0.5rem);
+}
+
+.card-image {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+  will-change: transform;
+}
+
+.artwork-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-info {
+  padding: 1.5rem;
+}
+
+.card-info h3 {
+  font-family: "De Fonte Plus";
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02rem;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.card-artist,
+.card-date {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.card-artist {
+  opacity: 0.8;
+  margin-bottom: 0.25rem;
+}
+
+.card-date {
+  opacity: 0.5;
+}
+
+/* Collection Highlights Section */
+.collection-highlights-section {
+  padding: 8rem 2rem;
+  background: linear-gradient(to bottom, #0a0a0a 0%, #000 50%, #0a0a0a 100%);
+  border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
+}
+
+.highlights-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.highlights-title {
+  font-family: "De Fonte Plus";
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: -0.05rem;
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.075rem solid rgba(255, 255, 255, 0.15);
+}
+
+.highlights-content {
+  display: grid;
+  gap: 4rem;
+}
+
+.highlight-piece {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.highlight-piece h3 {
+  font-family: "De Fonte Plus";
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #fff;
+  opacity: 0.95;
+}
+
+.highlight-piece p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+/* About Collection Section */
+.about-collection-section {
+  padding: 8rem 2rem;
+  background: linear-gradient(to bottom, #0a0a0a 0%, #000 100%);
+  border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.about-text p:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.cta-link {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: 0.075rem dashed rgba(255, 255, 255, 0.5);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 550;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+}
+
+.cta-link:hover {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.about-image {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  border: 0.075rem solid rgba(255, 255, 255, 0.15);
+}
+
+.about-image img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  will-change: transform;
+  transform: translateY(-10%);
+}
+
+/* Animation States */
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+}
+
+.animate-fade-up.animated {
+  will-change: auto;
+}
+
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  will-change: opacity, transform;
+}
+
+.animate-scale-in.animated {
+  will-change: auto;
+}
+
+.animate-parallax {
+  will-change: transform;
+}
+
+/* Performance optimizations */
+.card-image img,
+.about-image img,
+.carousel-images img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce animations on mobile */
+@media (max-width: 768px) {
+  .animate-fade-up,
+  .animate-scale-in {
+    animation-duration: 0.5s;
+  }
+  
+  /* Disable heavy parallax on mobile */
+  .about-image img,
+  .carousel-images {
+    will-change: auto !important;
+  }
+}
+
+/* Footer positioning for scrollable page */
+footer {
+  position: relative;
+  bottom: auto;
+  background: #000;
+  border-top: 0.075rem solid rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 900px) {
   h1 {
     font-size: 3rem;
@@ -231,5 +541,58 @@ footer {
   .learn-more-btn {
     padding: 0.875rem 1.5rem;
     font-size: 0.75rem;
+  }
+
+  /* New sections responsive */
+  .section-heading {
+    font-size: 2rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .artworks-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-image {
+    height: 350px;
+  }
+
+  .about-text {
+    order: 2;
+  }
+
+  .about-image {
+    order: 1;
+  }
+
+  /* Highlights section responsive */
+  .collection-highlights-section {
+    padding: 6rem 2rem;
+  }
+
+  .highlights-title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .highlights-content {
+    gap: 3rem;
+  }
+
+  .highlight-piece h3 {
+    font-size: 1.25rem;
+  }
+
+  .highlight-piece p {
+    font-size: 1rem;
   }
 }

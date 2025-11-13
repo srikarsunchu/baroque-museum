@@ -1,8 +1,16 @@
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { CustomEase } from "gsap/CustomEase";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  initLenis,
+  fadeUpOnScroll,
+  scaleInOnScroll,
+  parallaxOnScroll,
+  heroParallax,
+} from "./scroll-animations.js";
 
-gsap.registerPlugin(SplitText, CustomEase);
+gsap.registerPlugin(SplitText, CustomEase, ScrollTrigger);
 
 CustomEase.create(
   "hop",
@@ -239,4 +247,148 @@ function cleanupCarouselSlides() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", initCarousel);
+function initScrollAnimations() {
+  // Initialize Lenis smooth scroll
+  initLenis();
+
+  // Hero carousel parallax effect (subtle)
+  heroParallax(".carousel", ".carousel-images img", { speed: 0.2 });
+
+  // Fade up animations for section headings and text
+  fadeUpOnScroll(".animate-fade-up", {
+    start: "top 92%",
+    stagger: 0.15,
+    duration: 0.8,
+    y: 35,
+  });
+
+  // Scale in animations for artwork cards
+  scaleInOnScroll(".animate-scale-in", {
+    start: "top 90%",
+    stagger: 0.12,
+    duration: 0.7,
+    scale: 0.96,
+  });
+
+  // Parallax on about section image
+  parallaxOnScroll(".about-image img", {
+    start: "top bottom",
+    end: "bottom top",
+    speed: 0.15,
+  });
+
+  // Highlights section animations
+  const highlightsTitle = document.querySelector(".highlights-title");
+  if (highlightsTitle) {
+    gsap.from(highlightsTitle, {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: highlightsTitle,
+        start: "top 92%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Animate the border line under title
+    gsap.fromTo(
+      highlightsTitle,
+      {
+        backgroundImage: "linear-gradient(to right, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 0%)",
+        backgroundPosition: "0 100%",
+        backgroundSize: "0% 1px",
+        backgroundRepeat: "no-repeat",
+      },
+      {
+        backgroundSize: "100% 1px",
+        duration: 1.2,
+        ease: "expo.inOut",
+        scrollTrigger: {
+          trigger: highlightsTitle,
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }
+
+  // Highlight pieces stagger animation
+  const highlightPieces = document.querySelectorAll(".highlight-piece");
+  highlightPieces.forEach((piece, index) => {
+    gsap.from(piece, {
+      opacity: 0,
+      y: 25,
+      duration: 0.8,
+      delay: index * 0.12,
+      ease: "expo.out",
+      scrollTrigger: {
+        trigger: piece,
+        start: "top 95%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    // Animate h3 within each piece
+    const h3 = piece.querySelector("h3");
+    if (h3) {
+      gsap.from(h3, {
+        opacity: 0,
+        x: -20,
+        duration: 0.7,
+        delay: index * 0.12 + 0.2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: piece,
+          start: "top 95%",
+          toggleActions: "play none none none",
+        },
+      });
+    }
+  });
+
+  // Nav fade on scroll
+  ScrollTrigger.create({
+    start: 0,
+    end: "max",
+    onUpdate: (self) => {
+      const scrollProgress = self.progress;
+      const nav = document.querySelector("nav");
+      
+      if (scrollProgress > 0.05) {
+        gsap.to(nav, {
+          backgroundColor: "rgba(0, 0, 0, 0.95)",
+          backdropFilter: "blur(10px)",
+          duration: 0.3,
+        });
+      } else {
+        gsap.to(nav, {
+          backgroundColor: "transparent",
+          backdropFilter: "blur(0px)",
+          duration: 0.3,
+        });
+      }
+    },
+  });
+
+  // Carousel images parallax effect on scroll past
+  const carouselSection = document.querySelector(".carousel");
+  if (carouselSection) {
+    gsap.to(".carousel-images", {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: carouselSection,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initCarousel();
+  initScrollAnimations();
+});

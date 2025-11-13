@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "gsap": "^3.13.0",
+    "lenis": "^1.1.17",
     "vite": "^7.1.12"
   }
 }

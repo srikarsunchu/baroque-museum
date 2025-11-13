@@ -10,26 +10,36 @@
 
 /* Swiss Grid System - Base Variables */
 :root {
+  /* Baseline Grid System */
+  --baseline-unit: 8px;
+  --baseline-2x: 16px;
+  --baseline-3x: 24px;
+  --baseline-4x: 32px;
+  --baseline-6x: 48px;
+  --baseline-8x: 64px;
+  --baseline-12x: 96px;
+  
+  /* Grid System */
   --grid-columns: 12;
-  --grid-gap: 2rem;
-  --grid-margin: 4rem;
-  --spacing-unit: 1rem;
+  --grid-gap: var(--baseline-4x);
+  --grid-margin: var(--baseline-8x);
+  --spacing-unit: var(--baseline-2x);
   
-  /* Swiss Typography Scale */
-  --font-h1: 7rem;
-  --font-h2: 3.5rem;
-  --font-h3: 2rem;
-  --font-body: 1rem;
-  --font-small: 0.875rem;
-  --font-tiny: 0.75rem;
+  /* Swiss Typography Scale - Aligned to Baseline */
+  --font-h1: 112px; /* 7rem - 14 baseline units */
+  --font-h2: 56px; /* 3.5rem - 7 baseline units */
+  --font-h3: 32px; /* 2rem - 4 baseline units */
+  --font-body: 16px; /* 1rem - 2 baseline units */
+  --font-small: 14px; /* 0.875rem */
+  --font-tiny: 12px; /* 0.75rem */
   
-  /* Line Heights - Tight Swiss Style */
+  /* Line Heights - Aligned to Baseline Grid */
   --leading-tight: 0.9;
-  --leading-heading: 1;
-  --leading-body: 1.5;
+  --leading-heading: 1.1;
+  --leading-body: 1.5; /* 24px for 16px font */
   
-  /* Letter Spacing */
-  --tracking-tight: -0.02em;
+  /* Letter Spacing - Swiss Precision */
+  --tracking-tight: -0.025em;
   --tracking-normal: 0;
   --tracking-wide: 0.15em;
 }
@@ -53,6 +63,25 @@ body {
   color: #fff;
   font-size: var(--font-body);
   line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling for browsers that don't support Lenis */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 img {
@@ -60,6 +89,8 @@ img {
   height: 100%;
   object-fit: cover;
   display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Swiss Typography */
@@ -78,23 +109,32 @@ h2 {
   font-family: "De Fonte Plus";
   letter-spacing: var(--tracking-tight);
   line-height: var(--leading-heading);
-  margin-bottom: var(--spacing-unit);
+  margin-bottom: var(--baseline-3x);
 }
 
 h3 {
   text-transform: uppercase;
   font-size: var(--font-h3);
   font-family: "De Fonte Plus";
-  letter-spacing: 0;
+  letter-spacing: var(--tracking-normal);
   line-height: var(--leading-heading);
-  margin-bottom: calc(var(--spacing-unit) * 0.75);
+  margin-top: var(--baseline-4x);
+  margin-bottom: var(--baseline-2x);
+}
+
+h3:first-child {
+  margin-top: 0;
 }
 
 p {
   color: #fff;
   font-size: var(--font-body);
   line-height: var(--leading-body);
-  margin-bottom: var(--spacing-unit);
+  margin-bottom: var(--baseline-3x);
+}
+
+p:last-child {
+  margin-bottom: 0;
 }
 
 a {
@@ -116,6 +156,8 @@ nav {
     rgba(0, 0, 0, 0.9) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  will-change: transform;
 }
 
 nav .logo a,
@@ -196,6 +238,7 @@ footer p {
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
+  will-change: transform;
 }
 
 .hero-info {
@@ -212,6 +255,7 @@ footer p {
 
 .hero-title h1 {
   font-size: 5.5rem;
+  letter-spacing: 0.02em;
   word-break: keep-all;
   overflow-wrap: normal;
   white-space: normal;
@@ -251,7 +295,7 @@ footer p {
 
 /* Section Variations - Multi-column and Modular */
 .section {
-  margin-bottom: calc(var(--spacing-unit) * 6);
+  margin-bottom: var(--baseline-12x);
 }
 
 .section.full-width {
@@ -263,16 +307,34 @@ footer p {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: var(--grid-gap);
+  align-items: start;
 }
 
 .section.two-col h2 {
-  grid-column: 1 / 6;
+  grid-column: 1 / 5;
+  padding-right: var(--baseline-6x);
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+  font-size: var(--font-h3);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .section.two-col .section-content {
   grid-column: 6 / -1;
   column-count: 2;
   column-gap: var(--grid-gap);
+}
+
+.section.two-col .section-content h3 {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.section.two-col .section-content p {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .section.align-left {
@@ -288,9 +350,94 @@ footer p {
 }
 
 .section-title {
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  padding-bottom: var(--spacing-unit);
+  margin-bottom: var(--baseline-4x);
+  padding-bottom: var(--baseline-3x);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Image Styles - Swiss Precision */
+.image-figure {
+  margin: 0;
+  margin-bottom: var(--baseline-6x);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  transition: border-color 200ms ease;
+}
+
+.image-figure:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.image-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 200ms ease;
+}
+
+.image-figure:hover img {
+  opacity: 0.9;
+}
+
+.image-caption {
+  padding: var(--baseline-2x);
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: var(--font-small);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-normal);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Image Grid Layout */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+  margin: var(--baseline-6x) 0;
+}
+
+.image-grid .image-figure {
+  margin-bottom: 0;
+}
+
+.image-grid .col-6 {
+  grid-column: span 6;
+}
+
+.image-grid .col-4 {
+  grid-column: span 4;
+}
+
+.image-grid .col-3 {
+  grid-column: span 3;
+}
+
+/* Section with Image Combination */
+.section-with-image {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+  align-items: start;
+}
+
+.section-with-image .text-content {
+  grid-column: 1 / 8;
+}
+
+.section-with-image .image-content {
+  grid-column: 8 / -1;
+  position: sticky;
+  top: var(--baseline-12x);
+}
+
+.section-with-image.image-left .text-content {
+  grid-column: 6 / -1;
+}
+
+.section-with-image.image-left .image-content {
+  grid-column: 1 / 6;
 }
 
 /* About Baroque Page Specific */
@@ -379,14 +526,15 @@ footer p {
 /* Responsive Design */
 @media (max-width: 1200px) {
   :root {
-    --font-h1: 5rem;
-    --font-h2: 2.5rem;
-    --grid-margin: 3rem;
-    --grid-gap: 1.5rem;
+    --font-h1: 80px;
+    --font-h2: 40px;
+    --font-h3: 28px;
+    --grid-margin: 48px;
+    --grid-gap: 24px;
   }
 
   .hero-title h1 {
-    font-size: 4rem;
+    font-size: 64px;
   }
 
   .hero-image-container {
@@ -396,20 +544,37 @@ footer p {
   .hero-info {
     grid-column: 6 / 13;
   }
+
+  .section.two-col h2 {
+    grid-column: 1 / 4;
+    font-size: var(--font-h3);
+  }
+
+  .section.two-col .section-content {
+    grid-column: 5 / -1;
+  }
+
+  .section-with-image .text-content {
+    grid-column: 1 / 7;
+  }
+
+  .section-with-image .image-content {
+    grid-column: 7 / -1;
+  }
 }
 
 @media (max-width: 900px) {
   :root {
-    --font-h1: 3.5rem;
-    --font-h2: 2rem;
-    --font-h3: 1.5rem;
-    --grid-margin: 2rem;
-    --grid-gap: 1.5rem;
+    --font-h1: 56px;
+    --font-h2: 32px;
+    --font-h3: 24px;
+    --grid-margin: 32px;
+    --grid-gap: 24px;
   }
 
   nav,
   footer {
-    padding: 2rem;
+    padding: 32px;
   }
 
   /* Hero becomes stacked */
@@ -442,6 +607,8 @@ footer p {
 
   .section.two-col h2 {
     grid-column: 1 / -1;
+    font-size: var(--font-h2);
+    margin-bottom: var(--baseline-4x);
   }
 
   .section.two-col .section-content {
@@ -475,17 +642,95 @@ footer p {
   .detail-label {
     margin-top: var(--spacing-unit);
   }
+
+  /* Image Responsive */
+  .image-grid {
+    grid-template-columns: 1fr;
+    gap: var(--baseline-4x);
+  }
+
+  .image-grid .col-6,
+  .image-grid .col-4,
+  .image-grid .col-3 {
+    grid-column: 1 / -1;
+  }
+
+  .section-with-image {
+    grid-template-columns: 1fr;
+  }
+
+  .section-with-image .text-content,
+  .section-with-image .image-content {
+    grid-column: 1 / -1;
+  }
+
+  .section-with-image.image-left .text-content,
+  .section-with-image.image-left .image-content {
+    grid-column: 1 / -1;
+  }
+
+  .section-with-image .image-content {
+    position: static;
+    margin-bottom: var(--baseline-6x);
+  }
+}
+
+/* Animation helper classes */
+.word-reveal {
+  display: inline-block;
+  transform-origin: bottom;
+}
+
+/* Performance optimizations for animations */
+.hero-image-container,
+.image-figure,
+.section-title {
+  isolation: isolate;
+}
+
+/* GPU acceleration for animated elements */
+.hero-title h1,
+.section p,
+.image-figure img {
+  transform: translateZ(0);
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  /* Reduce parallax effects on mobile */
+  .hero-image {
+    will-change: auto !important;
+  }
+  
+  .image-figure img {
+    will-change: auto !important;
+  }
+  
+  /* Simplify animations on mobile */
+  .word-reveal {
+    animation-duration: 0.4s;
+  }
 }
 
 @media (max-width: 600px) {
   :root {
-    --font-h1: 2.5rem;
-    --font-h2: 1.75rem;
-    --font-h3: 1.25rem;
-    --grid-margin: 1.5rem;
+    --font-h1: 40px;
+    --font-h2: 28px;
+    --font-h3: 20px;
+    --grid-margin: 24px;
+    --grid-gap: 16px;
   }
 
   .hero-image-container {
     height: 40vh;
+  }
+
+  .image-caption {
+    font-size: 12px;
+    padding: var(--baseline-2x);
+  }
+
+  .section {
+    margin-bottom: var(--baseline-8x);
   }
 }
