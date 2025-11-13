@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "De Fonte Plus";
-  src: url("./DeFonte-DemiGras.ttf") format("truetype");
+  src: url("/DeFonte-DemiGras.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

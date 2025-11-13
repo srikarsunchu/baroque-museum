@@ -134,7 +134,7 @@ function bindCarouselControls() {
 function bindLearnMoreButton() {
   learnMoreBtn.addEventListener("click", () => {
     const currentSlide = carouselSlides[currentIndex];
-    window.location.href = `pages/${currentSlide.slug}.html`;
+    window.location.href = `/pages/${currentSlide.slug}.html`;
   });
 }
 

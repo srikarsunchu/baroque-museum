@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [],
-  "author": "",
+  "author": "Srikar Sunchu",
   "license": "ISC",
-  "description": "",
+  "description": "Baroque art carousel with smooth animations",
   "dependencies": {
     "gsap": "^3.13.0",
     "lenis": "^1.1.17",
