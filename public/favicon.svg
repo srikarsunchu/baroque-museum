@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Pearl earring inspired favicon -->
+  <defs>
+    <radialGradient id="pearlGradient" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#e8e8e8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d0d0d0;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="pearlHighlight" cx="40%" cy="25%" r="30%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background circle (dark) -->
+  <circle cx="50" cy="50" r="45" fill="#1a1a1a" />
+  
+  <!-- Pearl earring -->
+  <circle cx="50" cy="50" r="30" fill="url(#pearlGradient)" />
+  <circle cx="50" cy="50" r="30" fill="url(#pearlHighlight)" />
+  
+  <!-- Small highlight -->
+  <ellipse cx="42" cy="42" rx="8" ry="10" fill="#ffffff" opacity="0.6" />
+</svg>
+

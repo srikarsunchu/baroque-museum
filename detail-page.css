@@ -355,6 +355,17 @@ footer p {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.section-title .punctuation,
+h2 .punctuation,
+h1 .punctuation {
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: 0;
+}
+
+.section-title.wide-spacing {
+  letter-spacing: var(--tracking-wide);
+}
+
 /* Image Styles - Swiss Precision */
 .image-figure {
   margin: 0;
