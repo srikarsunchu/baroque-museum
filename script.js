@@ -43,6 +43,26 @@ const carouselSlides = [
     image: "/carousel/slide-img-5.jpg",
     slug: "an-elegant-company",
   },
+  {
+    title: "David with the Head of Goliath",
+    image: "/carousel/DavidnGoliath.png",
+    slug: "david-with-head-of-goliath",
+  },
+  {
+    title: "Girl with the Pearl Earring",
+    image: "/carousel/PearlEarring.png",
+    slug: "girl-with-pearl-earring",
+  },
+  {
+    title: "Adoration of the Magi",
+    image: "/carousel/adoration.jpg",
+    slug: "adoration-of-the-magi",
+  },
+  {
+    title: "The Night Watch",
+    image: "/carousel/TheNightWatch.png",
+    slug: "the-night-watch",
+  },
 ];
 
 let carousel, carouselImages, prevBtn, nextBtn, learnMoreBtn;
