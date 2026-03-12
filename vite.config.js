@@ -16,6 +16,7 @@ export default defineConfig({
         'adoration-of-the-magi': resolve(__dirname, 'pages/adoration-of-the-magi.html'),
         'the-night-watch': resolve(__dirname, 'pages/the-night-watch.html'),
         'about-baroque': resolve(__dirname, 'pages/about-baroque.html'),
+        'coronation-with-angels': resolve(__dirname, 'pages/coronation-with-angels.html'),
       },
     },
   },
