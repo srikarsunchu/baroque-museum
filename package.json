@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "Baroque art carousel with smooth animations",
   "dependencies": {
+    "bun": "^1.3.10",
     "gsap": "^3.13.0",
     "lenis": "^1.1.17",
     "vite": "^7.1.12"

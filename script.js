@@ -63,6 +63,11 @@ const carouselSlides = [
     image: "/carousel/TheNightWatch.png",
     slug: "the-night-watch",
   },
+  {
+    title: "Coronation with Angels",
+    image: "/carousel/Bartolomeo Cavarozzi HD Wallpaper.jpg",
+    slug: "coronation-with-angels",
+  },
 ];
 
 let carousel, carouselImages, prevBtn, nextBtn, learnMoreBtn;
