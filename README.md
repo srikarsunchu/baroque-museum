@@ -2,7 +2,7 @@
 
 A beautiful, interactive carousel showcasing Baroque art masterpieces with smooth animations powered by GSAP and Lenis.
 
-## 🎨 Features
+## Features
 
 - Stunning carousel with custom animations
 - Smooth scroll effects using Lenis
@@ -10,7 +10,7 @@ A beautiful, interactive carousel showcasing Baroque art masterpieces with smoot
 - Responsive design
 - Optimized performance
 
-## 🚀 Deployment on Vercel
+## Deployment on Vercel
 
 ### Prerequisites
 - A [Vercel account](https://vercel.com/signup)
@@ -57,7 +57,7 @@ npm run build
 npm run preview
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── index.html              # Main page
@@ -74,31 +74,31 @@ npm run preview
 
 ```
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **Vite** - Build tool and dev server
 - **GSAP** - Animation library
 - **Lenis** - Smooth scroll library
 - **Vanilla JavaScript** - No framework overhead
 
-## 🎯 Vercel Configuration
+## Vercel Configuration
 
 The project includes a `vercel.json` configuration file for optimal deployment. The build process is configured to:
 - Use Vite as the build tool
 - Output to the `dist` directory
 - Handle routing correctly for all pages
 
-## 📝 Notes
+## Notes
 
 - All images are optimized for web
 - Fonts are self-hosted for better performance
 - The `.gitignore` excludes build artifacts and documentation files
 
-## 👤 Author
+## Author
 
 Developed by Srikar Sunchu
 
-## 📄 License
+## License
 
 ISC
 
